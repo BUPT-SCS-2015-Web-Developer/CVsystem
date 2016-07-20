@@ -34,13 +34,13 @@
 
             <ul class="nav navbar-nav">
                 <li><a href="index.php">网站首页</a></li>
-				<li class="active"><a href="view.php" >信息查询</a></li>
+				<li><a href="view.php" >信息查询</a></li>
 				<li><a href="input.php" >信息录入</a></li>
 				<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                     aria-expanded="false">设置 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="change.php">修改密码</a></li>
+                        <li  class="active"><a href="change.php">修改密码</a></li>
                         <li><a href="logout.php">退出登录</a></li> 
                     </ul>
                 </li>

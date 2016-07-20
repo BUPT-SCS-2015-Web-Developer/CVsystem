@@ -1,7 +1,6 @@
+/*
 @import url(http://fonts.useso.com/css?family=Montserrat:400,700|Source+Sans+Pro:600,300,300italic);
-
-
-
+*/
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
@@ -3028,7 +3027,7 @@ a.list-group-item-danger.active:focus {
     -webkit-transition: padding 400ms ease-in-out;
     transition: padding 400ms ease-in-out;
 }
- 
+
 
 /** Feature Slider **/
 

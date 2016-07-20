@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="skins/eden.css" media="screen">
-    <link href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 
     <style>

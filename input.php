@@ -32,9 +32,9 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.php">网站首页</a></li>
+                    <li><a href="index.php">网站首页</a></li>
                     <li><a href="view.php" >信息查询</a></li>
-                    <li><a href="input.php" >信息录入</a></li>
+                    <li  class="active"><a href="input.php" >信息录入</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                           aria-expanded="false">设置 <span class="caret"></span></a>
@@ -80,14 +80,6 @@
                         <legend>信息录入</legend>
 
                         <div class="form-group">
-                            <label for="time" class="col-lg-2 control-label">简历填写时间*</label>
-
-                            <div class="col-lg-10">
-                                <input type="date" class="form-control" id="time" placeholder="" name="time" data-validation-required-message="请输入简历填写时间." required>
-								<p class="help-block"></p>
-                            </div>
-                        </div>
-						<div class="form-group">
                             <label for="name" class="col-lg-2 control-label">姓名*</label>
 
                             <div class="col-lg-10">
@@ -175,6 +167,21 @@
 								<p class="help-block"></p>
                             </div>
                         </div>
+						
+                        <div class="bs-component" id="subErr">
+							<div class="alert alert-dismissible alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>警告</h4>
+								<p> 连接服务器失败,请 <a href="#" class="alert-link">联系站务</a>.</p>
+							</div>
+						</div>
+						<div class="bs-component" id="subSuc">
+							<div class="alert alert-dismissible alert-success">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>提交成功!</h4>
+								<p> 将于几秒后跳转.</p>
+							</div>
+						</div>
 
 
 

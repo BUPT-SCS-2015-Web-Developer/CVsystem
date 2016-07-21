@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+    <link href="css/input.css" rel="stylesheet">
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -93,10 +94,10 @@
                             </div>
                         </div>
 						<div class="form-group">
-                            <label for="confirm" class="col-lg-2 control-label">新密码确认*</label>
+                            <label for="queren" class="col-lg-2 control-label">新密码确认*</label>
 
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="confirm" placeholder="" name="confirm" data-validation-required-message="请确认新密码." required>
+                                <input type="text" class="form-control" id="queren" placeholder="" name="queren" data-validation-required-message="请确认新密码." required>
 								<p class="help-block"></p>
                             </div>
                         </div>
@@ -146,6 +147,7 @@
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/change.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,6 @@
 
+
+
  $(function(){ 
 	
  	$("input").not("[type=submit]").jqBootstrapValidation({
@@ -8,31 +10,21 @@
         submitSuccess: function($form, event) {
             event.preventDefault(); // prevent default submit behaviour
             // get values from FORM
-			var record = new Object;
-            record.name = $("input#name").val();
-			record.gender = $("input#gender").val();
-			record.subject = $("input#subject").val();
-			record.university = $("input#university").val();
-			record.major = $("input#major").val();
-			record.college = $("input#college").val();
-			record.education = $("input#education").val();
-			record.phone = $("input#phone").val();
-			record.email = $("input#email").val();
-			record.schoolnum = $("input#schoolnum").val();
-			record.position = $("input#position").val();
-            
-            
-
+			var pass = new Object;
+            pass.oldpass = $("input#oldpass").val();
+			pass.newpass = $("input#newpass").val();
+			pass.queren = $("input#queren").val();
+           
             $.ajax({
-                url: "API/create.php",
+                url: "API/changePass.php",
 				asyn:false,
                 type: "POST",
-                data: record,
+                data: pass,
 				datatype: 'json',
                 cache: false,
                 success: function() {
                     $("#subSuc").slideDown(1000);
-                    setTimeout("window.location.href = 'input.php'",3000);
+                    setTimeout("window.location.href = 'index.php'",3000);
                 },
                 error: function() {
                     $("#subErr").slideDown(1000);
@@ -46,4 +38,4 @@
 	
 	
 	
-});
+});// JavaScript Document

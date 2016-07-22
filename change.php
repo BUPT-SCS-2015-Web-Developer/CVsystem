@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+    <link href="css/input.css" rel="stylesheet">
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -30,8 +31,8 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.php">网站首页</a></li>
-                    <li><a href="view.php" >信息查询</a></li>
+                    <li><a href="index.php">网站首页</a></li>
+                    <li><a href="view.php">信息查询</a></li>
                     <li><a href="input.php" >信息录入</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -62,7 +63,7 @@
 
 	<div class="bs-docs-section">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-10">
             <div class="page-header">
                 <h1 id="forms"></h1>
             </div>
@@ -70,7 +71,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-10">
             <div class="well bs-component">
                 <form class="form-horizontal">
                     <fieldset>
@@ -79,7 +80,7 @@
                         <div class="form-group">
                             <label for="oldpass" class="col-lg-2 control-label">原始密码*</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-lg-6">
                                 <input type="text" class="form-control" id="oldpass" placeholder="" name="oldpass" data-validation-required-message="请输入原始密码." required>
 								<p class="help-block"></p>
                             </div>
@@ -87,23 +88,38 @@
 						<div class="form-group">
                             <label for="newpass" class="col-lg-2 control-label">新密码*</label>
 
-                            <div class="col-lg-10">
+                            <div class="col-lg-6">
                                 <input type="text" class="form-control" id="newpass" placeholder="" name="newpass" data-validation-required-message="请输入新密码." required>
 								<p class="help-block"></p>
                             </div>
                         </div>
 						<div class="form-group">
-                            <label for="confirm" class="col-lg-2 control-label">新密码确认*</label>
+                            <label for="queren" class="col-lg-2 control-label">新密码确认*</label>
 
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="confirm" placeholder="" name="confirm" data-validation-required-message="请确认新密码." required>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" id="queren" placeholder="" name="queren" data-validation-required-message="请确认新密码." required>
 								<p class="help-block"></p>
                             </div>
                         </div>
+						
+                        <div class="bs-component" id="subErr">
+							<div class="alert alert-dismissible alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>警告</h4>
+								<p> 连接服务器失败,请 <a href="#" class="alert-link">联系站务</a>.</p>
+							</div>
+						</div>
+						<div class="bs-component" id="subSuc">
+							<div class="alert alert-dismissible alert-success">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>提交成功!</h4>
+								<p> 将于几秒后跳转.</p>
+							</div>
+						</div>
 
 
 						<div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
+                            <div class="col-lg-6 col-lg-offset-2">
                                 <button type="reset" class="btn btn-default">重置</button>
                                 <button type="submit" class="btn btn-primary">提交</button>
                             </div>
@@ -131,6 +147,7 @@
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/change.js"></script>
 
 </body>
 </html>

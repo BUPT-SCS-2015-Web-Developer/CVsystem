@@ -225,7 +225,9 @@
 						</div>
 					</div>
 					
-					
+                    
+                    
+					<!--  if面试官或者录入员  -->
 					<a href="edit.php?id=<?php  ?>" class="btn btn-primary">编辑</a> <!-- 编辑 -->
 					<a href="API/delete.php?id=<?php  ?>" class="btn btn-danger">删除</a> <!-- 删除 -->
 					

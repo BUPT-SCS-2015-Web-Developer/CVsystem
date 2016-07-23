@@ -19,7 +19,7 @@
         }
     </style>
 	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/jquery.jeditable.js"></script>
+	<script type="text/javascript" src="js/jquery-jeditable.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript">
 		$(function(){

@@ -64,7 +64,7 @@
         <br/><br/>
         <h2>信息查询</h2>
         <hr/>
-        <table id="example" class="display">
+        <table id="sis" class="display">
             <thead>
                 <tr>
                     <th>序号</th>
@@ -74,10 +74,9 @@
                     <th>二面</th>
                     <th>三面</th>
                     <th>四面</th>
-                    <th>操作</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+
         </table>
 
     </div>
@@ -88,6 +87,7 @@
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
+/*
     var data = [
     [
         "2015211000",
@@ -108,14 +108,24 @@
       "四面未进行"
     ]
 ];
-    $(document).ready( function(){ $('#example').DataTable( {
-    data: data
-} );
+    $(document).ready(
+      function()
+      {
+        $('#example').DataTable(
+          {
+            data: data
+          }
+        );
+      }
+    );
+*/
+    $(document).ready(function() {
+    $('#sis').dataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": "API/serverProcessingCustom.php"
     } );
-/*    $('#example').dataTable( {
-  "serverSide": true,
-  "ajax": "xhr.php"
-} );*/
+} );
     </script>
 </body>
 </html>

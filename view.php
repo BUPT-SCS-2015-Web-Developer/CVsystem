@@ -33,8 +33,8 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.php">网站首页</a></li>
-                    <li><a href="view.php" >信息查询</a></li>
+                    <li><a href="index.php">网站首页</a></li>
+                    <li  class="active"><a href="view.php" >信息查询</a></li>
                     <li><a href="input.php" >信息录入</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"

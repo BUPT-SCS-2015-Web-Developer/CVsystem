@@ -24,7 +24,7 @@
 	<script>
 		$(function(){ 
 			$('.edit').editable('API/save.php', {  
-				width     :150, 
+				width     :450, 
 				height    :25, 
 				cancel    : '取消', 
 				submit    : '确定', 
@@ -138,7 +138,7 @@
                         <td class="edit" id="position">position</td>
                     </tr>
 					
-					<!--                     if是面试官                        -->
+	<!--                     if是面试官           －－－－－－－－－－－－－－－               -->
 					<tr>
                         <td>面谈（一面）结果</td>
                         <td class="edit" id="result1">Mark</td>
@@ -175,6 +175,8 @@
                         <td>复试（四面）结果</td>
                         <td class="edit" id="result4">Mark</td>
                     </tr>
+                    
+   <!--                     if是面试官           －－－－－－－－－－－－－－－               -->
                     </tbody>
                 </table>
         </div>

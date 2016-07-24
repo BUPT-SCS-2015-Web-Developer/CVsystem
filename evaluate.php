@@ -100,10 +100,10 @@
     
     	                    <!--                if一面结果不为空  二面结果为空         -->
                         <div class="form-group">
-                            <label for="evaluate2" class="col-lg-2 control-label">初试（二面）评价</label>
+                            <label for="remark2" class="col-lg-2 control-label">初试（二面）评价</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="evaluate2" placeholder="" name="evaluate2">
+                                <input type="text" class="form-control" id="remark2" placeholder="" name="remark2">
 							</div>
                         </div>
                         <div class="form-group">
@@ -126,10 +126,10 @@
                         <!--                if二面结果不为空  三面结果为空         -->
 
 						<div class="form-group">
-                            <label for="evaluate3" class="col-lg-2 control-label">复试指导（三面）评价</label>
+                            <label for="remark3" class="col-lg-2 control-label">复试指导（三面）评价</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="evaluate3" placeholder="" name="evaluate3">
+                                <input type="text" class="form-control" id="remark3" placeholder="" name="remark3">
 							</div>
                         </div>
 						<div class="form-group">

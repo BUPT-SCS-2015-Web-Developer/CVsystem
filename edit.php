@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>XX公司XX系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,22 +18,25 @@
             background: #333333;
         }
     </style>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/jquery-jeditable.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			 $('.edit').editable('API/update.php', {
-				 callback  : function(value, settings) { 
-				 }
-		
-			 });
-			 
-		});
-    </script>
+	
+	<script type="text/javascript" src="js/jquery.js"></script> 
+	<script type="text/javascript" src="js/jquery.jeditable.js"></script> 
+	<script>
+		$(function(){ 
+			$('.edit').editable('API/save.php', {  
+				width     :150, 
+				height    :25, 
+				cancel    : '取消', 
+				submit    : '确定', 
+				tooltip   : '单击可以编辑...' 
+			}); 
+		}); 
+	</script>
 </head>
+
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
+<!-- 导航-->
+	<div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="##" class="navbar-brand">XX公司</a> <!--连接到公司网站-->
@@ -70,37 +73,124 @@
             </div>
         </div>
     </div>
-
+    
+    
+    
 <div class="container">
 
-
-
-
-
-
-
-
-
-
-
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <hr/>
-            <p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
-
+<br><br><br>
+	<div class="col-md-12">
+		<div>
+            <h1 class="mb-2">编辑信息</h1>
+                <!-- $STRIPED TABLE -->
+                <!-- ========================================= -->
+                <table class="table table-striped table-responsive">
+                    <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Value(点击以编辑）</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>姓名</td>
+                        <td class="edit" id="name">Mark</td>   
+                    </tr>
+                    <tr>
+                        <td>性别</td>
+                        <td class="edit" id="gender">Mark</td>  
+                    </tr>
+                    <tr>
+                        <td>应聘科目</td>
+                        <td class="edit" id="subject">Mark</td>
+                    </tr>
+					<tr>
+                        <td>本科学校（全称）</td>
+                        <td class="edit" id="university">university</td>
+                    </tr>
+					<tr>
+                        <td>本科专业</td>
+                        <td class="edit" id="major">major</td>
+                    </tr>
+					<tr>
+                        <td>硕/博学校（全称）</td>
+                        <td class="edit" id="college">college</td>
+                    </tr>
+					<tr>
+                        <td>最高学历</td>
+                        <td class="edit" id="education">education</td>
+                    </tr>
+					<tr>
+                        <td>手机号</td>
+                        <td class="edit" id="phone">phone</td>
+                    </tr>
+					<tr>
+                        <td>邮箱</td>
+                        <td class="edit" id="email">email</td>
+                    </tr>
+					<tr>
+                        <td>分校</td>
+                        <td class="edit" id="schoolnum">schoolnum</td>
+                    </tr>
+					<tr>
+                        <td>申请职位性质</td>
+                        <td class="edit" id="position">position</td>
+                    </tr>
+					
+					<!--                     if是面试官                        -->
+					<tr>
+                        <td>面谈（一面）结果</td>
+                        <td class="edit" id="result1">Mark</td>
+                    </tr>
+					<tr>
+                        <td>初试（二面）时间</td>
+                        <td class="edit" id="time2">Mark</td>
+                    </tr>
+					<tr>
+                        <td>二面评价</td>
+                        <td class="edit" id="remark2">Mark</td>
+                    </tr>
+					<tr>
+                        <td>二面结果</td>
+                        <td class="edit" id="result2">Mark</td>
+                    </tr>
+					<tr>
+                        <td>复试指导（三面）时间</td>
+                        <td class="edit" id="time3">Mark</td>
+                    </tr>
+					<tr>
+                        <td>三面评价</td>
+                        <td class="edit" id="remark3">Mark</td>
+                    </tr>
+					<tr>
+                        <td>复试指导（三面）结果</td>
+                        <td class="edit" id="result3">Mark</td>
+                    </tr>
+					<tr>
+                        <td>复试（四面）时间</td>
+                        <td class="edit" id="time4">Mark</td>
+                    </tr>
+					<tr>
+                        <td>复试（四面）结果</td>
+                        <td class="edit" id="result4">Mark</td>
+                    </tr>
+                    </tbody>
+                </table>
         </div>
     </div>
-</footer>
+	<a href="detail.php?id=<?php  ?>" class="btn btn-primary">完成</a>
 
+	<footer>
+		<div class="row">
+			<div class="col-lg-12">
+				<hr/>
+				<p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
+
+			</div>
+		</div>
+	</footer>
 </div>
-
-
-
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/input.js"></script>
-
 
 </body>
 </html>

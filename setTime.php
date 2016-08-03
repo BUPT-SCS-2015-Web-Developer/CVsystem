@@ -1,11 +1,9 @@
-<?php
+<<?php
 
 	session_start();
 	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
 		exit('illegal access!');
 	}
-	else if($_SESSION['type']!="interviewer")
-		exit('illegal access!');
 	
 	include_once "API/db_config.php";
 	$id = $_GET['id'];
@@ -103,74 +101,47 @@
             <div class="well bs-component">
                 <form class="form-horizontal" action="http://localhost/CVsystem/API/getevaluate.php ?id=<?php echo $id; ?>" method="post">
                     <fieldset>
-                        <legend>评价</legend>
+                        <legend>设定面试时间</legend>
 
-                         <!--                if一面结果为空          -->
-						<?php if(!$row["result1"]){?>
+                         <!--                if二面时间为空          -->
+						<?php if(!$row["time2"]){?>                      
                         <div class="form-group">
-                            <label for="result1" class="col-lg-2 control-label">面谈（一面）结果</label>
+                            <label for="time2" class="col-lg-2 control-label">初试（二面）时间</label>
+
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="result1" placeholder="通过 或 未通过" name="result1">
+                                <input type="text" class="form-control" id="time2" placeholder="" name="time2">
 							</div>
-                        </div>                        
-                        
+                        </div>
 						<?php } ?>
 	                         <!--                          -->
     
     
-    	                    <!--                if一面结果不为空  二面结果为空         -->
+    	                    <!--                if二面时间不为空  三面时间为空         -->
 						<?php if($row["result1"]&&(!$row["result2"])){?>
-                        <div class="form-group">
-                            <label for="remark2" class="col-lg-2 control-label">初试（二面）评价</label>
+						<div class="form-group">
+                            <label for="time3" class="col-lg-2 control-label">复试指导（三面）时间</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="remark2" placeholder="" name="remark2">
+                                <input type="text" class="form-control" id="time3" placeholder="" name="time3">
 							</div>
                         </div>
-                        <div class="form-group">
-                            <label for="result2" class="col-lg-2 control-label">初试（二面）结果</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="result2" placeholder="通过 或 未通过" name="result2">
-							</div>
-                        </div>
-						
 						<?php } ?>
                         <!--                                     -->
 
 
 
-                        <!--                if二面结果不为空  三面结果为空         -->
+                        <!--                if三面结果不为空  四面时间为空         -->
                         <?php if($row["result2"]&&(!$row["result3"])){?>
 						<div class="form-group">
-                            <label for="remark3" class="col-lg-2 control-label">复试指导（三面）评价</label>
+                            <label for="time4" class="col-lg-2 control-label">复试（四面）时间</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="remark3" placeholder="" name="remark3">
+                                <input type="text" class="form-control" id="time4" placeholder="" name="time4">
 							</div>
                         </div>
-						<div class="form-group">
-                            <label for="result3" class="col-lg-2 control-label">复试指导（三面）结果</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="result3" placeholder="通过 或 未通过" name="result3">
-							</div>
-                        </div>
-						
 						<?php } ?>
                         
-                        
-                        <!--                if三面结果不为空  四面结果为空         -->
-                        <?php if($row["result3"]&&(!$row["result4"])){?>
-						<div class="form-group">
-                            <label for="result4" class="col-lg-2 control-label">复试（四面）结果</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="result4" placeholder="通过 或 未通过" name="result4">
-							</div>
-                        </div>
-                        <?php } ?>
-						<!--                                                 -->
-
+                      
                         <div class="bs-component" id="subErr">
 							<div class="alert alert-dismissible alert-warning">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -215,7 +186,7 @@
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/evaluate.js"></script>
+<script src="js/setTime.js"></script>
 
 
 </body>

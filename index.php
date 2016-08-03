@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/login.css">
+	<script src="js/login.js"></script>
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -67,7 +69,7 @@
     				        </div>
     				        <div class="bs-component">
     					          <div class="jumbotron">
-    						            <h1>公司简介</h1>
+    						            <h1>系统简介</h1>
                 						<p>balabalabalabala巴拉拉拉拉拉拉我们是茄子开发团队.</p>
     						            <p><a class="btn btn-primary btn-lg">Learn more</a></p>
     					          </div>
@@ -75,30 +77,33 @@
     		        </div>
 
 
-    			      <div class="col-lg-6">
-    				        <div class="well bs-component">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <label for="username" class="col-lg-2 control-label">用户名</label>
-                                <div class="col-lg-4">
-                                    <input class="form-control" id="username" placeholder="请输入用户名" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-lg-2 control-label">密码</label>
-                                <div class="col-lg-4">
-                                    <input class="form-control" id="inputPassword" placeholder="请输入密码" type="password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-4 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-primary">提交</button>
-                                    <button type="reset" class="btn btn-default">重置</button>
-                                </div>
-                            </div>
-                        </form>
-    				        </div>
-    			      </div>
+    			    <div class="col-lg-12">
+    				    <div class="well bs-component">
+							<form class="form-horizontal login-form">
+								<span id="login-info" class="login-error-message">登录失败，请重试！</span>
+								<div class="form-group">
+									<label for="username" class="col-lg-4 control-label">用户名</label>
+									<div class="col-lg-5">
+										<input class="form-control" id="username" name="username" placeholder="请输入用户名" type="text">
+										<span id="erroru" class="error-message">用户名不能为空！</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword" class="col-lg-4 control-label">密码</label>
+									<div class="col-lg-5">
+										<input class="form-control" id="inputPassword" name="inputPassword" placeholder="请输入密码" type="password">
+										<span id="errorp" class="error-message">密码不能为空！</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-4 col-lg-offset-4">
+										<button type="reset" class="btn btn-default">重置</button>
+										<input class="btn btn-primary" type="button" id="submit" value="登录">
+									</div>
+								</div>
+							</form>
+    				    </div>    
+    			    </div>
 
                 <footer>
                     <div class="row">

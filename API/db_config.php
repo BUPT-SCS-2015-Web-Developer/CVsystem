@@ -1,4 +1,5 @@
 <?php
+	//数据库文件
 	$db_user = 'HelpingTest';
 	$db_password = 'HfcHsY4fZePtAwae';
 	$db_database = 'CVsystem';

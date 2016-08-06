@@ -1,5 +1,5 @@
 <?php
-    //修改密码的文件
+    //修改密码的API
     session_start();
     if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
 		exit('illegal access!');

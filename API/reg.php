@@ -31,7 +31,7 @@
 
 				$user = $db->get_row($sql_query);
 				$type = $user->user_type;
-				
+
 				if($user)
 				{
 					session_start();
@@ -40,14 +40,14 @@
 					$_SESSION['type'] = $type;
 					if(isset ($_SESSION['userurl']))
 						echo json_encode(array('url'=> $_SESSION['userurl']));
-					else 
+					else
 					{
-							echo json_encode(array('url'=>'view.php'));
+							echo json_encode(array('url'=>'index.php'));
 					}
 				}
 				else
 				{
 					echo json_encode(array('msg'=>'用户名或密码输入错误，登陆失败'));
 				}
-		}	
+		}
 ?>

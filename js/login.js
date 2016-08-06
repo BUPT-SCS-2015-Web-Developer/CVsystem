@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
     //错误提示
     $form_login.find('#submit').on('click', function(event) {
         var ok = 1;
-        if ($('#username').val() == '') {
+        if ($('#username').val() === '') {
             event.preventDefault();
             $('#username').addClass('has-error');
             $('#erroru').addClass('is-visible');
@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
             $('#username').removeClass('has-error');
             $('#erroru').removeClass('is-visible');
         }
-        if ($('#inputPassword').val() == '') {
+        if ($('#inputPassword').val() === '') {
             event.preventDefault();
             $('#inputPassword').addClass('has-error');
             $('#errorp').addClass('is-visible');
@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
 
     //IE9 placeholder fallback
     //credits http://www.hagenburger.net/BLOG/HTML5-Input-Placeholder-Fix-With-jQuery.html
-    if (!Modernizr.input.placeholder) {
+/*    if (!Modernizr.input.placeholder) {
         $('[placeholder]').focus(function() {
             var input = $(this);
             if (input.val() == input.attr('placeholder')) {
@@ -66,8 +66,7 @@ jQuery(document).ready(function($) {
                 }
             })
         });
-    }
-
+    }*/
 });
 
 

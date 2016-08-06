@@ -1,11 +1,3 @@
-<?php
-    session_start();
-    if(!isset($_SESSION['username']) || !isset($_SESSION['type']))
-    {
-        echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
-        exit(0);
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +11,6 @@
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/login.css">
-	<script src="js/login.js"></script>
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -34,20 +25,35 @@
     ================================================== -->
         <div class="bs-docs-section">
     		    <div class="row">
-    			      <div class="col-lg-12">
-    			          <div class="page-header">
-    					          <h1 id="container"></h1>
-    				        </div>
-    				        <div class="bs-component">
-    					          <div class="jumbotron">
-    						            <h3>系统说明</h3>
-                						<p>欢迎使用公司简历录入及管理系统</p>
-    						            <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-    					          </div>
-    				        </div>
-    		        </div>
-
                     <br/><br/><br/>
+    			    <div class="col-lg-12">
+    				    <div class="well bs-component">
+							<form class="form-horizontal login-form" id="login">
+								<span id="login-info" class="login-error-message">登录失败，请重试！</span>
+								<div class="form-group">
+									<label for="username" class="col-lg-4 control-label">用户名</label>
+									<div class="col-lg-5">
+										<input class="form-control" id="username" name="username" placeholder="请输入用户名" type="text">
+										<span id="erroru" class="error-message">用户名不能为空！</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputPassword" class="col-lg-4 control-label">密码</label>
+									<div class="col-lg-5">
+										<input class="form-control" id="inputPassword" name="inputPassword" placeholder="请输入密码" type="password">
+										<span id="errorp" class="error-message">密码不能为空！</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-4 col-lg-offset-4">
+										<input class="btn btn-primary" type="button" id="submit" value="登录">
+										<button type="reset" class="btn btn-default">重置</button>
+									</div>
+								</div>
+							</form>
+    				    </div>
+    			    </div>
+
                 <footer>
                     <div class="row">
                         <div class="col-lg-12" align="center">
@@ -63,5 +69,6 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/login.js"></script>
 </body>
 </html>

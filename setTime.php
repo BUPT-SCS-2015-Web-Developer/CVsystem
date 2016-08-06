@@ -4,12 +4,12 @@
 	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
 		exit('illegal access!');
 	}
-	
+
 	include_once "API/db_config.php";
 	$id = $_GET['id'];
 	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
 	mysql_select_db($db_database, $con);
-	
+
 ?>
 
 <!DOCTYPE html>
@@ -87,15 +87,15 @@
         </div>
     </div>
 
-<?php 	
+<?php
 
 	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
 	mysql_query("set names utf8");
 	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
 	$row = mysql_fetch_array($result);
-	
+
 ?>
-	
+
     <div class="row">
         <div class="col-lg-12">
             <div class="well bs-component">
@@ -104,7 +104,7 @@
                         <legend>设定面试时间</legend>
 
                          <!--                if二面时间为空          -->
-						<?php if(!$row["time2"]){?>                      
+						<?php if(!$row["time2"]){?>
                         <div class="form-group">
                             <label for="time2" class="col-lg-2 control-label">初试（二面）时间</label>
 
@@ -114,8 +114,8 @@
                         </div>
 						<?php } ?>
 	                         <!--                          -->
-    
-    
+
+
     	                    <!--                if二面时间不为空  三面时间为空         -->
 						<?php if($row["result1"]&&(!$row["result2"])){?>
 						<div class="form-group">
@@ -140,8 +140,8 @@
 							</div>
                         </div>
 						<?php } ?>
-                        
-                      
+
+
                         <div class="bs-component" id="subErr">
 							<div class="alert alert-dismissible alert-warning">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>

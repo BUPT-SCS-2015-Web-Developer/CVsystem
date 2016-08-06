@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['username']) || !isset($_SESSION['type']))
+    {
+        echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
+        exit(0);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,44 +29,7 @@
     </style>
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="##" class="navbar-brand">XX公司</a> <!--连接到公司网站-->
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.php">网站首页</a></li>
-                    <li  class="active"><a href="view.php" >信息查询</a></li>
-                    <li><a href="input.php" >信息录入</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                          aria-expanded="false">设置 <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="change.php">修改密码</a></li>
-                            <li><a href="logout.php">退出登录</a></li>
-                        </ul>
-                    </li>
-                </ul>
-<!--
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                          <input class="form-control" placeholder="Search" type="text">
-                    </div>
-                    <button type="submit" class="btn btn-primary">搜索</button>
-                </form>
--->
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">联系站务</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<?php include("API/header.php"); ?>
 <!--==============================正文部分=======================================-->
     <div class="container">
         <br/><br/>
@@ -123,8 +94,16 @@
     $('#sis').dataTable( {
         "processing": true,
         "serverSide": true,
-        "ajax": "API/serverProcessingCustom.php"
-    } );
+        "ajax": "API/serverProcessingCustom.php",
+        "language": {
+            "lengthMenu": "每页 _MENU_ 条记录",
+            "zeroRecords": "没有找到记录",
+            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+            "infoEmpty": "无记录",
+            "infoFiltered": "(从 _MAX_ 条记录过滤)",
+            "search": "查找",
+            "loadingRecords": "查找中"
+    }});
 } );
     </script>
 </body>

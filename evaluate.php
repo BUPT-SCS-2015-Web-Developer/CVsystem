@@ -1,17 +1,17 @@
 <?php
 
 	session_start();
-	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
-		exit('illegal access!');
-	}
-	else if($_SESSION['type']!="interviewer")
-		exit('illegal access!');
-	
+//	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
+//		exit('illegal access!');
+//	}
+//	else if($_SESSION['type']!="interviewer")
+//		exit('illegal access!');
+
 	include_once "API/db_config.php";
 	$id = $_GET['id'];
 	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
 	mysql_select_db($db_database, $con);
-	
+
 ?>
 
 <!DOCTYPE html>
@@ -89,15 +89,15 @@
         </div>
     </div>
 
-<?php 	
+<?php
 
 	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
 	mysql_query("set names utf8");
 	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
 	$row = mysql_fetch_array($result);
-	
+
 ?>
-	
+
     <div class="row">
         <div class="col-lg-12">
             <div class="well bs-component">
@@ -112,12 +112,12 @@
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" id="result1" placeholder="通过 或 未通过" name="result1">
 							</div>
-                        </div>                        
-                        
+                        </div>
+
 						<?php } ?>
 	                         <!--                          -->
-    
-    
+
+
     	                    <!--                if一面结果不为空  二面结果为空         -->
 						<?php if($row["result1"]&&(!$row["result2"])){?>
                         <div class="form-group">
@@ -133,7 +133,7 @@
                                 <input type="text" class="form-control" id="result2" placeholder="通过 或 未通过" name="result2">
 							</div>
                         </div>
-						
+
 						<?php } ?>
                         <!--                                     -->
 
@@ -155,10 +155,10 @@
                                 <input type="text" class="form-control" id="result3" placeholder="通过 或 未通过" name="result3">
 							</div>
                         </div>
-						
+
 						<?php } ?>
-                        
-                        
+
+
                         <!--                if三面结果不为空  四面结果为空         -->
                         <?php if($row["result3"]&&(!$row["result4"])){?>
 						<div class="form-group">

@@ -20,13 +20,16 @@
     $db = new ezSQL_mysql($db_user, $db_password, $db_database, $db_host);
 	$db->query("set names 'utf8'");
 
+	if($db==NULL)
+		echo json_encode(array('msg'=>'连接数据库失败！'));
+
 	$check_query = "SELECT * FROM user WHERE user_ID='$username'";
 	$user = $db->get_row($check_query);
 
-	if(!$user){
-		echo json_encode(array('msg'=>'请检查用户名输入'));
-	}
-	else{
+//	if(!$user){
+//		echo json_encode(array('msg'=>'请检查用户名输入'));
+//	}
+//	else{
 				$sql_query = "SELECT * FROM user WHERE user_ID='$username' AND user_password='$password'";
 
 				$user = $db->get_row($sql_query);
@@ -42,12 +45,12 @@
 						echo json_encode(array('url'=> $_SESSION['userurl']));
 					else
 					{
-							echo json_encode(array('url'=>'index.php'));
+							echo json_encode(array('url'=>'index.php','msg'=>'登陆成功'));
 					}
 				}
 				else
 				{
 					echo json_encode(array('msg'=>'用户名或密码输入错误，登陆失败'));
 				}
-		}
+//		}
 ?>

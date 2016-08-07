@@ -33,13 +33,15 @@ jQuery(document).ready(function($) {
             dataType: 'json',
             success: function(json) {
                 if (json.msg) {
-                    document.getElementById("login-info").innerHTML = json.msg;
-                    $('#login-info').addClass('is-visible');
+            //        document.getElementById("login-info").innerHTML = json.msg;
+                    alert(json.msg);
+            //        $('#login-info').addClass('is-visible');
                 }
                 if (json.url) { window.location.href = json.url };
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 $('#login-info').addClass('is-visible');
+                alert(json.msg);
             }
         });
     });

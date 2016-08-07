@@ -1,13 +1,9 @@
 
- $(function(){
+jQuery(document).ready(function($) {
+    var $form_login = $('#insert');
 
- 	$("input").not("[type=submit]").jqBootstrapValidation({
-        preventSubmit: true,
-        submitError: function($form, event, errors) {
-        },
-        submitSuccess: function($form, event) {
-            event.preventDefault(); // prevent default submit behaviour
-            // get values from FORM
+    //错误提示
+    $form_login.find('#submit').on('click', function(event) {
 			var record = new Object;
             record.name = $("input#name").val();
 			record.gender = $("input#gender").val();
@@ -43,27 +39,34 @@
             });*/
 
             $.ajax({
-                url: "API/getInsert.php",
                 type: "post",
+                url: "API/getInsert.php",
                 data: record,
-				datatype: 'json',
-                cache: false,
+				dataType: 'json',
                 success: function(json) {
-                    if (json.msg) {
-                        $('#login-info').innerHTML = json.msg;
-                    }
-                    if (json.url) { window.location.href = json.url };
+                        alert(json.msg);
+                        window.location.href = "insert.php";
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    $('#login-info').innerHTML = json.msg;
+//                    $('#login-info').innerHTML = json.msg;
+                    alert(json.msg);
                 }
             });
-        },
-        filter: function() {
-            return $(this).is(":visible");
-        },
-    });
-
-
-
+        });
 });
+
+jQuery.fn.putCursorAtEnd = function() {
+    return this.each(function() {
+        // If this function exists...
+        if (this.setSelectionRange) {
+            // ... then use it (Doesn't work in IE)
+            // Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
+            var len = $(this).val().length * 2;
+            this.setSelectionRange(len, len);
+        } else {
+            // ... otherwise replace the contents with itself
+            // (Doesn't work in Google Chrome)
+            $(this).val($(this).val());
+        }
+    });
+};

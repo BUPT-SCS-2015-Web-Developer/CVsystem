@@ -52,7 +52,7 @@ while ($row = $recordsTotalResult->fetch_array(SQLITE3_ASSOC)) {
     $recordsTotal =  $row['sum'];
 }
 //定义过滤条件查询过滤后的记录数sql
-$sumSqlWhere =" where id LIKE '%".$search."%'";
+$sumSqlWhere =" where name LIKE '%".$search."%'";
 if(strlen($search)>0){
     $recordsFilteredResult = $db->query($sumSql.$sumSqlWhere);
     while ($row = $recordsFilteredResult->fetch_array(SQLITE3_ASSOC)) {

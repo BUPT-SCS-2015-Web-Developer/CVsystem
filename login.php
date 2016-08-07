@@ -32,20 +32,20 @@
 								<span id="login-info" class="login-error-message">登录失败，请重试！</span>
 								<div class="form-group">
 									<label for="username" class="col-lg-4 control-label">用户名</label>
-									<div class="col-lg-5">
+									<div class="col-lg-8">
 										<input class="form-control" id="username" name="username" placeholder="请输入用户名" type="text">
 										<span id="erroru" class="error-message">用户名不能为空！</span>
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword" class="col-lg-4 control-label">密码</label>
-									<div class="col-lg-5">
+									<div class="col-lg-8">
 										<input class="form-control" id="inputPassword" name="inputPassword" placeholder="请输入密码" type="password">
 										<span id="errorp" class="error-message">密码不能为空！</span>
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-lg-4 col-lg-offset-4">
+									<div class="col-lg-5 col-lg-offset-4">
 										<input class="btn btn-primary" type="button" id="submit" value="登录">
 										<button type="reset" class="btn btn-default">重置</button>
 									</div>

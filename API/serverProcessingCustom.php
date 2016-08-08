@@ -1,7 +1,7 @@
 <?php
-//include "SQLconfig.php";
 error_reporting(E_ALL^E_NOTICE^E_WARNING);
-$db = new mysqli("localhost","root","toor","cvsystem");
+include_once("db_config.php");
+$db = new mysqli($db_host,$db_user,$db_password,$db_database);
 if (!$db)
   {
   die('Could not connect: ' . mysql_error());
@@ -52,7 +52,7 @@ while ($row = $recordsTotalResult->fetch_array(SQLITE3_ASSOC)) {
     $recordsTotal =  $row['sum'];
 }
 //定义过滤条件查询过滤后的记录数sql
-$sumSqlWhere =" where name LIKE '%".$search."%'";
+$sumSqlWhere =" where name LIKE '%".$search."%' or id LIKE '%".$search."%'";
 if(strlen($search)>0){
     $recordsFilteredResult = $db->query($sumSql.$sumSqlWhere);
     while ($row = $recordsFilteredResult->fetch_array(SQLITE3_ASSOC)) {

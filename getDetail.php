@@ -1,16 +1,27 @@
 <?php
-
 	session_start();
 	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
 		exit('illegal access!');
 	}
-	
-	include_once "API/db_config.php";
-	
-	$id = $_POST['id'];//!!!
-	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
-	mysql_select_db($db_database, $con);
-	
+	if (isset($_GET['id']))
+		$id = $_GET['id'];//!!!
+	else {
+		die("请勿直接访问此页面！");
+	}
+
+	include_once("API/db_config.php");
+	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
+	if (!$db)
+	  {
+	  die('Could not connect: ' . mysql_error());
+	  }
+  	$sql_query = "SELECT * FROM `cvinformation` WHERE id = $id";//查询语句
+
+  	if (!($result = $db->query($sql_query)))
+  	{
+  		die("未能查询到相关信息！");
+  	}
+  	$row = $result->fetch_array(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -56,11 +67,11 @@
                     aria-expanded="false">设置 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="change.php">修改密码</a></li>
-                        <li><a href="logout.php">退出登录</a></li> 
+                        <li><a href="logout.php">退出登录</a></li>
                     </ul>
                 </li>
             </ul>
-			
+
 			<form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input class="form-control" placeholder="Search" type="text">
@@ -85,14 +96,6 @@
 				</div>
 			</div>
 		</div>
-<?php 	
-
-	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
-	mysql_query("set names utf8");
-	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
-	$row = mysql_fetch_array($result);
-	
-?>
 		<div class="row">
 			<div class="col-lg-10">
 				<div class="bs-component">
@@ -174,89 +177,116 @@
 							<?php echo $row["position"];?>
 						</div>
 					</div>
-					
-					<?php if($row["result1"]){?>
+
 					<div class="panel panel-default">
 						<div class="panel-heading">面谈（一面）结果</div>
 						<div class="panel-body">
-							<?php echo $row["result1"];?>
+							<?php
+								if($row["result1"]!=NULL)
+									echo $row['result1'];
+								else
+									echo "未评价";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["time2"]){?>
 					<div class="panel panel-default">
-						<div class="panel-heading">初试（二面）时间</div>
+						<div class="panel-heading">二面时间</div>
 						<div class="panel-body">
-							<?php echo $row["time2"];?>
+							<?php
+								if($row["time2"]!=NULL)
+									echo $row['time2'];
+								else
+									echo "未设定";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["remark2"]){?>
-					<div class="panel panel-default">
-						<div class="panel-heading">二面评价</div>
-						<div class="panel-body">
-							<?php echo $row["remark2"];?>
-						</div>
-					</div>
-					<?php } ?>
-					<?php if($row["result2"]){?>
 					<div class="panel panel-default">
 						<div class="panel-heading">二面结果</div>
 						<div class="panel-body">
-							<?php echo $row["result2"];?>
+							<?php
+								if($row["result2"]!=NULL)
+									echo $row['result2'];
+								else
+									echo "未评价";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["time3"]){?>
 					<div class="panel panel-default">
-						<div class="panel-heading">复试指导（三面）时间</div>
+						<div class="panel-heading">二面评价</div>
 						<div class="panel-body">
-							<?php echo $row["time3"];?>
+							<?php
+								if($row["remark2"]!=NULL)
+									echo $row['remark2'];
+								else
+									echo "未评价";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["remark3"]){?>
+					<div class="panel panel-default">
+						<div class="panel-heading">三面时间</div>
+						<div class="panel-body">
+							<?php
+								if($row["time3"]!=NULL)
+									echo $row['time3'];
+								else
+									echo "未设定";
+							?>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">三面结果</div>
+						<div class="panel-body">
+							<?php
+								if($row["result3"]!=NULL)
+									echo $row['result3'];
+								else
+									echo "未评价";
+							?>
+						</div>
+					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">三面评价</div>
 						<div class="panel-body">
-							<?php echo $row["remark3"];?>
+							<?php
+								if($row["remark3"]!=NULL)
+									echo $row['remark3'];
+								else
+									echo "未评价";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["result3"]){?>
 					<div class="panel panel-default">
-						<div class="panel-heading">复试指导（三面）结果</div>
+						<div class="panel-heading">四面时间</div>
 						<div class="panel-body">
-							<?php echo $row["result3"];?>
+							<?php
+								if($row["time4"]!=NULL)
+									echo $row['time4'];
+								else
+									echo "未设定";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["time4"]){?>
 					<div class="panel panel-default">
-						<div class="panel-heading">复试（四面）时间</div>
+						<div class="panel-heading">四面结果</div>
 						<div class="panel-body">
-							<?php echo $row["time4"];?>
+							<?php
+								if($row["result4"]!=NULL)
+									echo $row['result4'];
+								else
+									echo "未评价";
+							?>
 						</div>
 					</div>
-					<?php } ?>
-					<?php if($row["result4"]){?>
-					<div class="panel panel-default">
-						<div class="panel-heading">复试（四面）结果</div>
-						<div class="panel-body">
-							<?php echo $row["result4"];?>
-						</div>
-					</div>
-					<?php } ?>
-					
-					
-                    <a href="edit.php?id=<?php echo $id; ?>" class="btn btn-default">编辑</a> <!-- 编辑 -->
+
+
+                    <a href="edit.php?id=<?php echo $id; ?>" class="btn btn-info">编辑</a> <!-- 编辑 -->
 					<a href="API/delete.php?id=<?php echo $id; ?>" class="btn btn-danger">删除</a> <!-- 删除 -->
-					
+
 					<?php if($_SESSION['type']=='interviewer'){ ?>
 					<a href="evaluate.php?id=<?php echo $id; ?>" class="btn btn-info">评价</a> <!-- 只有面试官能评价 -->
 					<a href="setTime.php?id=<?php echo $id; ?>" class="btn btn-primary">设定面试时间</a>
 					<?php } ?>
-					
+
 				</div>
 			</div>
 		</div>

@@ -1,11 +1,15 @@
 <?php
-error_reporting(E_ALL^E_NOTICE^E_WARNING);
+//error_reporting(E_ALL^E_NOTICE^E_WARNING);
 include_once("db_config.php");
 $db = new mysqli($db_host,$db_user,$db_password,$db_database);
 if (!$db)
   {
   die('Could not connect: ' . mysql_error());
   }
+
+  $output = array(
+    "aaData" => array()
+  );
 
 //获取Datatables发送的参数 必要
 $draw = $_GET['draw'];//这个值作者会直接返回给前台
@@ -69,14 +73,14 @@ if(strlen($search)>0){
     //如果有搜索条件，按条件过滤找出记录
     $dataResult = $db->query($totalResultSql.$sumSqlWhere.$orderSql.$limitSql);
     while ($row = $dataResult->fetch_array(SQLITE3_ASSOC)) {
-        $obj = array($row['id'], $row['name'], $row['gender'], $row['result1'], $row['result2'],$row['result3'],$row['result4']);
+        $obj = array($row['id'], $row['name'], $row['gender'], $row['result1'], $row['result2'],$row['result3'],$row['result4'],"修改");
         array_push($infos,$obj);
     }
 }else{
     //直接查询所有记录
     $dataResult = $db->query($totalResultSql.$orderSql.$limitSql);
     while ($row = $dataResult->fetch_array(SQLITE3_ASSOC)) {
-        $obj = array($row['id'], $row['name'], $row['gender'], $row['result1'], $row['result2'],$row['result3'],$row['result4']);
+        $obj = array($row['id'], $row['name'], $row['gender'], $row['result1'], $row['result2'],$row['result3'],$row['result4'],"修改");
         array_push($infos,$obj);
     }
 }

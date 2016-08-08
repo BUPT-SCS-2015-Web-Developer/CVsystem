@@ -38,13 +38,14 @@
         <table id="sis" class="display">
             <thead>
                 <tr>
-                    <th>序号</th>
+                    <th style="width:35px">序号</th>
                     <th>姓名</th>
                     <th>性别</th>
                     <th>一面</th>
                     <th>二面</th>
                     <th>三面</th>
                     <th>四面</th>
+                    <th>操作</th>
                 </tr>
             </thead>
 
@@ -58,53 +59,37 @@
     <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-/*
-    var data = [
-    [
-        "2015211000",
-        "Sissel",
-        "男",
-        "一面通过",
-        "二面未进行",
-        "三面未进行",
-        "四面未进行"
-    ],
-    [
-      "2015211001",
-      "Missile",
-      "男",
-      "一面通过",
-      "二面未通过",
-      "三面未进行",
-      "四面未进行"
-    ]
-];
-    $(document).ready(
-      function()
-      {
-        $('#example').DataTable(
-          {
-            data: data
-          }
-        );
-      }
-    );
-*/
-    $(document).ready(function() {
-    $('#sis').dataTable( {
-        "processing": true,
-        "serverSide": true,
-        "ajax": "API/serverProcessingCustom.php",
-        "language": {
-            "lengthMenu": "每页 _MENU_ 条记录",
-            "zeroRecords": "没有找到记录",
-            "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
-            "infoEmpty": "无记录",
-            "infoFiltered": "(从 _MAX_ 条记录过滤)",
-            "search": "查找",
-            "loadingRecords": "查找中"
-    }});
-} );
+        $(document).ready(function() {
+        $('#sis').dataTable( {
+            "aoColumns": [
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {"sClass": "center"},
+                {
+                    "sClass": "center",
+                    "createdCell": function (td, cellData, rowData, row, col) {
+                        $(td).html("<a href='getDetail.php?id="+rowData[0]+
+                        "'>编辑</a>&nbsp;&nbsp;");
+                    }
+                },
+            ],
+            "processing": true,
+            "serverSide": true,
+            "ajax": "API/serverProcessingCustom.php",
+            "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "search": "查找",
+                "loadingRecords": "查找中"
+        }});
+    } );
     </script>
 </body>
 </html>

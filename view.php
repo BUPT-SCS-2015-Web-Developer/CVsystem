@@ -14,12 +14,12 @@
     <title>XX公司XX系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
 
     <style>
         .navbar-holder-dark{
@@ -54,9 +54,9 @@
     </div>
 
     <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf8" src="js/jquery.min.js"></script>
     <!-- DataTables -->
-    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="js/jquery.dataTables.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {

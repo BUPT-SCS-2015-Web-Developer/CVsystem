@@ -15,11 +15,11 @@
     <title>XX公司XX系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/input.css" rel="stylesheet">
+    <link href="css/insert.css" rel="stylesheet">
 
     <style>
         .navbar-holder-dark{
@@ -285,7 +285,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/insert.js"></script>
 

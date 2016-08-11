@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['username']) || !isset($_SESSION['type']))
+    if(!isset($_SESSION['user_ID']) || !isset($_SESSION['user_type']))
     {
         echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
         exit(0);
@@ -19,7 +19,6 @@
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/login.css">
-	<script src="js/login.js"></script>
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -42,7 +41,17 @@
     					          <div class="jumbotron">
     						            <h3>系统说明</h3>
                 						<p>欢迎使用公司简历录入及管理系统</p>
-    						            <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+    						            <?php
+                                        if($_SESSION['user_type']==="hr")
+                                            echo "<p>您好，Hr！本账号可进行面试者录入及修改，以及面试时间的录入和评价！</p>";
+                                        else if ($_SESSION['user_type']==="dataentry") {
+                                            echo "<p>您好，本账号可以进行面试人员信息的录入及修改操作！</p>";
+                                        }
+                                        else {
+                                            session_destroy();
+                                            header('Location:login.php');
+                                        }
+                                        ?>
     					          </div>
     				        </div>
     		        </div>

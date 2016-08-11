@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(isset($_SESSION['user_ID']) && isset($_SESSION['user_type']))
+{
+    echo "<script language=javascript>alert('您已登录!');window.location.href='index.php';</script>";
+    exit(0);
+}
+else {
+    session_destroy();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +40,6 @@
     			    <div class="col-lg-12">
     				    <div class="well bs-component">
 							<form class="form-horizontal login-form" id="login">
-								<span id="login-info" class="login-error-message">登录失败，请重试！</span>
 								<div class="form-group">
 									<label for="username" class="col-lg-4 control-label">用户名</label>
 									<div class="col-lg-8">
@@ -67,7 +77,7 @@
         </div>
     </div>
 
-    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/login.js"></script>
 </body>

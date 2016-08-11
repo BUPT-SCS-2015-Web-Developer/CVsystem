@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['username']) || !isset($_SESSION['type']))
+    if(!isset($_SESSION['user_ID']) || !isset($_SESSION['user_type']))
     {
         echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
         exit(0);
@@ -285,7 +285,7 @@
 
 
 
-<script src="js/jquery.min.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/insert.js"></script>
 

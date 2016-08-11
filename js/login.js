@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
     var $form_login = $('#login');
 
     //错误提示
@@ -27,21 +27,20 @@ jQuery(document).ready(function($) {
             type: 'post',
             url: 'API/reg.php',
             data: {
-                username: $('#username').val(),
-                inputPassword: $('#inputPassword').val()
+                user_ID: $('#username').val(),
+                user_password: $('#inputPassword').val()
             },
             dataType: 'json',
             success: function(json) {
                 if (json.msg) {
-            //        document.getElementById("login-info").innerHTML = json.msg;
                     alert(json.msg);
-            //        $('#login-info').addClass('is-visible');
                 }
-                if (json.url) { window.location.href = json.url };
+                if (json.url) {
+                    window.location.href = json.url
+                };
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                $('#login-info').addClass('is-visible');
-                alert(json.msg);
+                alert("与服务器交互有误，请联系管理员！");
             }
         });
     });

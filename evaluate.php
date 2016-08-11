@@ -1,12 +1,11 @@
 <?php
 
-	session_start();
-//	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
-//		exit('illegal access!');
-//	}
-//	else if($_SESSION['type']!="interviewer")
-//		exit('illegal access!');
-
+    session_start();
+    if(!isset($_SESSION['user_ID']) || !isset($_SESSION['user_type']))
+    {
+        echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
+        exit(0);
+    }
 	include_once "API/db_config.php";
 	$id = $_GET['id'];
 	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");

@@ -44,12 +44,15 @@ jQuery(document).ready(function($) {
                 data: record,
 				dataType: 'json',
                 success: function(json) {
+                    if(json.msg){
                         alert(json.msg);
                         window.location.href = "insert.php";
+                    }
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-//                    $('#login-info').innerHTML = json.msg;
-                    alert(json.msg);
+                    if(json.msg) {
+                        alert(json.msg);
+                    }
                 }
             });
         });

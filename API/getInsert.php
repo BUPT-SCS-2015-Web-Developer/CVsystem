@@ -1,9 +1,10 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['username'])){
-		exit('illegal access!');
+	if(!isset($_SESSION['user_ID'])){
+		header('Location:login.php');
+        exit(0);
 	}
-	$registerBy = $_SESSION['username'];
+	$registerBy = $_SESSION['user_ID'];
 	$_SESSION['registerTime']=$registerTime = date("Y-m-d_H-i");
 	include_once("db_config.php");
 	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
@@ -11,12 +12,9 @@
 	{
 		exit('Could not connect: ' . mysql_error());
 	}
-	$sumSql = "SELECT count(id) as sum FROM cvinformation";
-	$recordsTotalResult = $db->query($sumSql);
-	while ($row = $recordsTotalResult->fetch_array(SQLITE3_ASSOC)) {
-	    $recordsTotal =  $row['sum'];
-	}
-	$id = $recordsTotal+1;
+	$sumSql = "SELECT * FROM cvinformation";
+	$sumresult = $db->query($sumSql);
+	$id = $sumresult->num_rows+2;
 	$_SESSION['name']=$name=$_POST['name'];
 	$_SESSION['gender']=$gender=$_POST['gender'];
 	$_SESSION['subject']=$subject=$_POST['subject'];
@@ -31,8 +29,9 @@
 
 	$sql_query="INSERT INTO `cvinformation` (`id`, `name`, `gender`, `subject`, `university`, `major`, `college`, `education`, `phone`, `email`, `schoolnum`, `position`, `result1`, `result2`, `result3`, `result4`, `remark1`, `remark2`, `remark3`, `remark4`, `registerTime`, `registerBy`) VALUES ($id, '$name', '$gender', '$subject', '$university', '$major', '$college', '$education', '$phone', '$email', '$schoolnum', '$position', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,'$registerTime', '$registerBy')";
 	if(!($db->query($sql_query)))
-	 	die("error:".$db->error) ;
-
-	echo json_encode(array('msg'=>'录入成功'));
-//    mysqli_close($db);
+	 	echo json_encode(array('msg'=>$db->error));
+	else {
+		echo json_encode(array('msg'=>'录入成功'));
+	}
+    mysqli_close($db);
 ?>

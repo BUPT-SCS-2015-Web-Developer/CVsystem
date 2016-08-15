@@ -1,23 +1,35 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
-		exit('illegal access!');
+    session_start();
+    if(!isset($_SESSION['user_ID']) || !isset($_SESSION['user_type']))
+    {
+        echo "<script language=javascript>alert('请先登录!');window.location.href='login.php';</script>";
+        exit(0);
+    }
+	if (isset($_GET['id']))
+		$id = $_GET['id'];//!!!
+	else {
+		die("请勿直接访问此页面！");
 	}
-	else if($_SESSION['type']!="admin")
-		exit('illegal access!');
 
-	include_once "API/db_config.php";
+	include_once("API/db_config.php");
+	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
+	if (!$db)
+	  {
+	  die('Could not connect: ' . mysql_error());
+	  }
+  	$sql_query = "SELECT * FROM `cvinformation` WHERE id = $id";//查询语句
 
-	$id = $_POST['id'];
-	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
-	mysql_select_db($db_database, $con);
-
+  	if (!($result = $db->query($sql_query)))
+  	{
+  		die("未能查询到相关信息！");
+  	}
+  	$row = $result->fetch_array(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>XX公司XX系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,7 +38,7 @@
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/input.css" rel="stylesheet">
+    <link href="css/insert.css" rel="stylesheet">
 
     <style>
         .navbar-holder-dark{
@@ -35,168 +47,182 @@
         }
     </style>
 
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery.jeditable.js"></script>
-	<script>
-		$(function(){
-			$('.edit').editable('API/save.php?idbig=<?php echo $id; ?>', {
-				width     :450,
-				height    :25,
-				cancel    : '取消',
-				submit    : '确定',
-				tooltip   : '单击可以编辑...'
-			});
-		});
-	</script>
 </head>
-
 <body>
-<!-- 导航-->
-	<?php include_once("API/header.php") ?>
-
-
-
+<?php include("API/header.php"); ?>
 <div class="container">
 
-<br><br><br>
-	<div class="col-md-12">
-		<div>
-<?php
-	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
-	mysql_query("set names utf8");
-	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
-	$row = mysql_fetch_array($result);
-
-?>
-            <h1 class="mb-2">编辑信息</h1>
-                <!-- $STRIPED TABLE -->
-                <!-- ========================================= -->
-                <table class="table table-striped table-responsive">
-                    <thead>
-                    <tr>
-                        <th>项目</th>
-                        <th>Value(点击以编辑）</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>姓名</td>
-                        <td class="edit" id="name"><?php echo $row["name"];?></td>
-                    </tr>
-                    <tr>
-                        <td>性别</td>
-                        <td class="edit" id="gender"><?php echo $row["gender"];?></td>
-                    </tr>
-                    <tr>
-                        <td>应聘科目</td>
-                        <td class="edit" id="subject"><?php echo $row["subject"];?></td>
-                    </tr>
-					<tr>
-                        <td>本科学校（全称）</td>
-                        <td class="edit" id="university"><?php echo $row["university"];?></td>
-                    </tr>
-					<tr>
-                        <td>本科专业</td>
-                        <td class="edit" id="major"><?php echo $row["major"];?></td>
-                    </tr>
-					<tr>
-                        <td>硕/博学校（全称）</td>
-                        <td class="edit" id="college"><?php echo $row["college"];?></td>
-                    </tr>
-					<tr>
-                        <td>最高学历</td>
-                        <td class="edit" id="education"><?php echo $row["education"];?></td>
-                    </tr>
-					<tr>
-                        <td>手机号</td>
-                        <td class="edit" id="phone"><?php echo $row["phone"];?></td>
-                    </tr>
-					<tr>
-                        <td>邮箱</td>
-                        <td class="edit" id="email"><?php echo $row["email"];?></td>
-                    </tr>
-					<tr>
-                        <td>分校</td>
-                        <td class="edit" id="schoolnum"><?php echo $row["schoolnum"];?></td>
-                    </tr>
-					<tr>
-                        <td>申请职位性质</td>
-                        <td class="edit" id="position"><?php echo $row["position"];?></td>
-                    </tr>
-
-		<?php if($_SESSION['type']=='interviewer'){ ?>
-			<?php if($row["result1"]){?>
-					<tr>
-                        <td>面谈（一面）结果</td>
-                        <td class="edit" id="result1"><?php echo $row["result1"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["time2"]){?>
-					<tr>
-                        <td>初试（二面）时间</td>
-                        <td class="edit" id="time2"><?php echo $row["time2"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["remark2"]){?>
-					<tr>
-                        <td>二面评价</td>
-                        <td class="edit" id="remark2"><?php echo $row["remark2"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["result2"]){?>
-					<tr>
-                        <td>二面结果</td>
-                        <td class="edit" id="result2"><?php echo $row["result2"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["time3"]){?>
-					<tr>
-                        <td>复试指导（三面）时间</td>
-                        <td class="edit" id="time3"><?php echo $row["time3"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["remark3"]){?>
-					<tr>
-                        <td>三面评价</td>
-                        <td class="edit" id="remark3"><?php echo $row["remark3"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["result3"]){?>
-					<tr>
-                        <td>复试指导（三面）结果</td>
-                        <td class="edit" id="result3"><?php echo $row["result3"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["time4"]){?>
-					<tr>
-                        <td>复试（四面）时间</td>
-                        <td class="edit" id="time4"><?php echo $row["time4"];?></td>
-                    </tr>
-			<?php } ?>
-			<?php if($row["result4"]){?>
-					<tr>
-                        <td>复试（四面）结果</td>
-                        <td class="edit" id="result4"><?php echo $row["result4"];?></td>
-                    </tr>
-            <?php } ?>
-		<?php } ?> <!--  对应if是面试官   -->
-                    </tbody>
-                </table>
+	<!-- Forms
+================================================== -->
+<div class="bs-docs-section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="forms"></h1>
+            </div>
         </div>
     </div>
-	<a href="detail.php?id=<?php echo $id; ?>" class="btn btn-primary">完成</a>
 
-	<footer>
-		<div class="row">
-			<div class="col-lg-12">
-				<hr/>
-				<p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well bs-component">
+                <form class="form-horizontal" id="edit">
+                    <fieldset>
+                        <legend align="center">信息修改</legend>
 
-			</div>
-		</div>
-	</footer>
+						<div class="form-group">
+							<label for="id" class="col-lg-2 control-label">ID*</label>
+
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="id" placeholder="" name="id" data-validation-required-message="请输入姓名." value="<?php echo $id?>" readonly>
+								<p class="help-block"></p>
+							</div>
+						</div>
+                        <div class="form-group">
+                            <label for="name" class="col-lg-2 control-label">姓名*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="name" placeholder="" name="name" data-validation-required-message="请输入姓名." value="<?php echo $row['name']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="gender" class="col-lg-2 control-label">性别*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="gender" placeholder="" name="gender" data-validation-required-message="请输入性别." value="<?php echo $row['gender']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="subject" class="col-lg-2 control-label">应聘科目*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="subject" placeholder="" name="subject" data-validation-required-message="请输入应聘科目." value="<?php echo $row['subject']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="university" class="col-lg-2 control-label">本科学校（全称）*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="university" placeholder="" name="university" data-validation-required-message="请输入本科学校." value="<?php echo $row['university']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="major" class="col-lg-2 control-label">本科专业*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="major1" placeholder="" name="major1" data-validation-required-message="请输入本科专业." value="<?php echo $row['major1']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="college" class="col-lg-2 control-label">硕/博学校（全称）</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="college" placeholder="" name="college" data-validation-required-message="请输入硕博学校." value="<?php echo $row['college']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="major2" class="col-lg-2 control-label">硕/博专业</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="major2" placeholder="" name="major2" data-validation-required-message="请输入硕/博专业." value="<?php echo $row['major2']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="education" class="col-lg-2 control-label">最高学历*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="education" placeholder="" name="education" data-validation-required-message="请输入最高学历." value="<?php echo $row['education']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="phone" class="col-lg-2 control-label">手机号*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="phone" placeholder="" name="phone" data-validation-required-message="请输入手机号." value="<?php echo $row['phone']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="email" class="col-lg-2 control-label">邮箱*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="email" placeholder="" name="email" data-validation-required-message="请输入邮箱." value="<?php echo $row['email']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="schoolnum" class="col-lg-2 control-label">分校*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="schoolnum" placeholder="" name="schoolnum" data-validation-required-message="请输入分校." value="<?php echo $row['schoolnum']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+						<div class="form-group">
+                            <label for="position" class="col-lg-2 control-label">申请职位性质*</label>
+
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="position" placeholder="" name="position" data-validation-required-message="请输入申请职位性质." value="<?php echo $row['position']?>" required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+
+                        <div class="bs-component" id="subErr">
+							<div class="alert alert-dismissible alert-warning">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>警告</h4>
+								<p> 连接服务器失败,请 <a href="#" class="alert-link">联系站务</a>.</p>
+							</div>
+						</div>
+						<div class="bs-component" id="subSuc">
+							<div class="alert alert-dismissible alert-success">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h4>提交成功!</h4>
+								<p> 将于几秒后跳转.</p>
+							</div>
+						</div>
+
+
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <input type="button" id="submit" class="btn btn-primary" value="提交"/>
+                                <button type="reset" class="btn btn-default">重置</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <hr/>
+            <p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
+
+        </div>
+    </div>
+</footer>
+
 </div>
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/edit.js"></script>
+
 
 </body>
 </html>

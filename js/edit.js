@@ -1,10 +1,11 @@
 
-$(document).ready(function($) {
-    var $form_login = $('#insert');
+jQuery(document).ready(function($) {
+    var $form_login = $('#edit');
 
     //错误提示
     $form_login.find('#submit').on('click', function(event) {
 			var record = new Object;
+            record.id= $("input#id").val();
             record.name = $("input#name").val();
 			record.gender = $("input#gender").val();
 			record.subject = $("input#subject").val();
@@ -40,13 +41,13 @@ $(document).ready(function($) {
 
             $.ajax({
                 type: "post",
-                url: "API/getInsert.php",
+                url: "API/getEdit.php",
                 data: record,
 				dataType: 'json',
                 success: function(json) {
                     if(json.msg){
                         alert(json.msg);
-                        window.location.href = "insert.php";
+                        window.location.href = "getDetail.php?id="+$("input#id").val();
                     }
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {

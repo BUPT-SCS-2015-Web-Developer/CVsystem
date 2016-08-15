@@ -1,34 +1,46 @@
 <?php
-
 	session_start();
-	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
-		exit('illegal access!');
+	if(!isset($_SESSION['user_ID'])){
+		header('Location:login.php');
+        exit(0);
 	}
-	
-	include_once "db_config.php";
-	$id = $_GET['id'];
-	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
-	mysql_select_db($db_database, $con);
-	
-	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
-	mysql_query("set names utf8");
-	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
-	$row = mysql_fetch_array($result);
-	
-	if (!$row["time2"]){
-	    $time2=$_POST['time2'];
-		mysql_query("UPDATE cvinformation SET time2='$time2' WHERE id=$id ");
+
+	include_once("db_config.php");
+	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
+	if (!$db)
+	{
+		exit('Could not connect: ' . mysql_error());
 	}
-	else if ($row["time2"]&&(!$row["time3"])){
-	    $time3=$_POST['time3'];
-		mysql_query("UPDATE cvinformation SET time3='$time3' WHERE id=$id ");
+	$id = floatval(addslashes($_POST['id']));
+	$sumSql = "SELECT * FROM 'cvinformation' WHERE 'id' = $id ";
+
+	$time1=addslashes($_POST['time1']);
+	if($time1==="未设定")
+	{
+		$time1 = "";
 	}
-	else if ($row["time3"]&&(!$row["time4"])){
-	    $time4=$_POST['time4'];
-		mysql_query("UPDATE cvinformation SET time4='$time4' WHERE id=$id ");
+	$time2=addslashes($_POST['time2']);
+	if($time2==="未设定")
+	{
+		$time2 = "";
 	}
-	
-	
-	echo json_encode(mysql_error());//json那边需要返回数组
-    mysql_close($con);
+	$time3=addslashes($_POST['time3']);
+	if($time3==="未设定")
+	{
+		$time3 = "";
+	}
+	$time4=addslashes($_POST['time4']);
+	if($time4==="未设定")
+	{
+		$time4 = "";
+	}
+
+	$sql_query="UPDATE cvinformation SET time1 = '$time1' ,time2 = '$time2' , time3 = '$time3' , time4 = '$time4' WHERE `cvinformation`.`id` = $id";
+
+	if(!($db->query($sql_query)))
+	 	echo json_encode(array('msg'=>$db->error));
+	else {
+		echo json_encode(array('msg'=>'设定成功'));
+	}
+    mysqli_close($db);
 ?>

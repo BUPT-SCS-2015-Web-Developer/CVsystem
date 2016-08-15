@@ -1,7 +1,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a href="##" class="navbar-brand">XX公司</a> <!--连接到公司网站-->
+            <a href="##" class="navbar-brand">学而思培优</a> <!--连接到公司网站-->
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -10,7 +10,8 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">网站首页</a></li>
+                <!-- class="active"-->
+                <li><a href="index.php">网站首页</a></li>
                 <li><a href="view.php" >信息查询</a></li>
                 <li><a href="insert.php" >信息录入</a></li>
             </ul>

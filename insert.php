@@ -88,15 +88,22 @@
                             <label for="major" class="col-lg-2 control-label">本科专业*</label>
 
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="major" placeholder="" name="major" data-validation-required-message="请输入本科专业." required>
+                                <input type="text" class="form-control" id="major1" placeholder="" name="major" data-validation-required-message="请输入本科专业." required>
 								<p class="help-block"></p>
                             </div>
                         </div>
 						<div class="form-group">
-                            <label for="college" class="col-lg-2 control-label">硕/博学校（全称）*</label>
+                            <label for="college" class="col-lg-2 control-label">硕/博学校（全称）</label>
 
                             <div class="col-lg-10">
                                 <input type="text" class="form-control" id="college" placeholder="" name="college" data-validation-required-message="请输入硕博学校." required>
+								<p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="major2" class="col-lg-2 control-label">硕/博专业</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="major2" placeholder="" name="major2" data-validation-required-message="请输入硕/博专业." required>
 								<p class="help-block"></p>
                             </div>
                         </div>
@@ -211,7 +218,7 @@
                                 <label for="major" class="col-lg-3 control-label">本科专业</label>
 
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="major" placeholder="" name="major" value='.$_SESSION["major"].' readonly>
+                                    <input type="text" class="form-control" id="major" placeholder="" name="major" value='.$_SESSION["major1"].' readonly>
                                     <p class="help-block"></p>
                                 </div>
                             </div>
@@ -221,6 +228,13 @@
                                 <div class="col-lg-9">
                                     <input type="text" class="form-control" id="college" placeholder="" name="college" value='.$_SESSION["college"].' readonly>
                                     <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="major2" class="col-lg-3 control-label">硕/博专业</label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" id="major2" placeholder="" name="major2" value='.$_SESSION["major2"].' readonly>
+    								<p class="help-block"></p>
                                 </div>
                             </div>
                             <div class="form-group">

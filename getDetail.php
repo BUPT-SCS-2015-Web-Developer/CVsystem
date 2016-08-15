@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 	if(!isset($_SESSION['user_ID']) || !isset($_SESSION['user_type']))
 	{
@@ -36,6 +35,7 @@
     <title>XX公司XX系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="css/detail.css" media ="screen">
     <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
@@ -51,8 +51,6 @@
 </head>
 <body>
 <?php include("API/header.php") ?>
-
-
 <div class="container">
 	<div class="bs-docs-section">
 		<div class="row">
@@ -63,221 +61,120 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
-				<div class="bs-component">
-					<div class="panel panel-default">
-						<div class="panel-heading">编号</div>
-						<div class="panel-body">
-							<?php echo $id;?>
-						</div>
-					</div>
+			<div class="col-lg-12">
+				<div id="formtable" class="panel panel-default">
+					<div class="bs-component">
+					<table id="formtable">
+						<tr>
+							<td style = "background-color:#ecf0f1;padding:15px;font-size:30px;border-bottom:0px;" colspan="8">ID.<?php echo $row["id"];?>个人简历</td>
+						</tr>
 
-					<div class="panel panel-default">
-						<div class="panel-heading">简历填写时间</div>
-						<div class="panel-body">
-							<?php echo $row["registerTime"];?>
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">本科专业</div>
-						<div class="panel-body">
-							<?php echo $row["major"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">最高学历</div>
-						<div class="panel-body">
-							<?php echo $row["education"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">分校</div>
-						<div class="panel-body">
-							<?php echo $row["schoolnum"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">初试（二面）时间</div>
-						<div class="panel-body">
-							<?php
-								if($row["time2"]!=NULL)
-									echo $row['time2'];
-								else
-									echo "未设定";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">复试指导（三面）时间</div>
-						<div class="panel-body">
-							<?php
-								if($row["time3"]!=NULL)
-									echo $row['time3'];
-								else
-									echo "未设定";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">复试（四面）时间</div>
-						<div class="panel-body">
-							<?php
-								if($row["time4"]!=NULL)
-									echo $row['time4'];
-								else
-									echo "未设定";
-							?>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="bs-component">
-					<div class="panel panel-default">
-						<div class="panel-heading">姓名</div>
-						<div class="panel-body">
-							<?php echo $row["name"];?>
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">应聘科目</div>
-						<div class="panel-body">
-							<?php echo $row["subject"];?>
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">硕/博学校</div>
-						<div class="panel-body">
-							<?php echo $row["college"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">手机号</div>
-						<div class="panel-body">
-							<?php echo $row["phone"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">申请职位性质</div>
-						<div class="panel-body">
-							<?php echo $row["position"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">二面评价</div>
-						<div class="panel-body">
-							<?php
-								if($row["remark2"]!=NULL)
-									echo $row['remark2'];
-								else
-									echo "未评价";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">三面评价</div>
-						<div class="panel-body">
-							<?php
-								if($row["remark3"]!=NULL)
-									echo $row['remark3'];
-								else
-									echo "未评价";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">复试（四面）结果</div>
-						<div class="panel-body">
-							<?php
-								if($row["result4"]!=NULL)
-									echo $row['result4'];
-								else
-									echo "未评价";
-							?>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="bs-component">
-					<div class="panel panel-default">
-						<div class="panel-heading">性别</div>
-						<div class="panel-body">
-							<?php echo $row["gender"];?>
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">本科学校</div>
-						<div class="panel-body">
-							<?php echo $row["university"];?>
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">硕/博专业</div>
-						<div class="panel-body">
-							<?php echo $row["major2"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">邮箱</div>
-						<div class="panel-body">
-							<?php echo $row["email"];?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">面谈（一面）结果</div>
-						<div class="panel-body">
-							<?php
-								if($row["result1"]!=NULL)
-									echo $row['result1'];
-								else
-									echo "未评价";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">二面结果</div>
-						<div class="panel-body">
-							<?php
-								if($row["result2"]!=NULL)
-									echo $row['result2'];
-								else
-									echo "未评价";
-							?>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">复试指导（三面）结果</div>
-						<div class="panel-body">
-							<?php
-								if($row["result3"]!=NULL)
-									echo $row['result3'];
-								else
-									echo "未评价";
-							?>
-						</div>
+						<tr id="firstline">
+							<td style="width:8%">姓名</td>
+							<td style="width:12%"><?php echo $row["name"]; ?></td>
+							<td style="width:8%">性别</td>
+							<td style="width:12%"><?php echo $row["gender"]; ?></td>
+							<td style="width:8%">录入者</td>
+							<td style="width:12%"><?php echo $row["registerBy"]; ?></td>
+							<td style="width:16%">上次修改时间</td>
+							<td style="width:24%"><?php echo $row["registerTime"];?></td>
+						</tr>
+						<tr>
+							<td colspan="2">最高学历</td>
+							<td colspan="2"><?php echo $row["education"] ?></td>
+							<td colspan="2">应聘科目</td>
+							<td colspan="2"><?php echo $row["subject"] ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">本科学校</td>
+							<td colspan="2"><?php echo $row["university"] ?></td>
+							<td colspan="2">本科专业</td>
+							<td colspan="2"><?php echo $row["major1"] ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">硕/博学校</td>
+							<td colspan="2"><?php echo $row["university"] ?></td>
+							<td colspan="2">硕/博专业</td>
+							<td colspan="2"><?php echo $row["major1"] ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">所选分校</td>
+							<td colspan="2"><?php echo $row["schoolnum"] ?></td>
+							<td colspan="2">申请职位性质</td>
+							<td colspan="2"><?php echo $row["position"] ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">手机号</td>
+							<td colspan="2"><?php echo $row["phone"] ?></td>
+							<td colspan="2">邮箱</td>
+							<td colspan="2"><?php echo $row["email"] ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">一面时间</td>
+							<td colspan="2"><?php if($row['time1']!=NULL)echo $row["time1"];else echo "未设定"; ?></td>
+							<td colspan="2">二面时间</td>
+							<td colspan="2"><?php if($row['time2']!=NULL)echo $row["time2"];else echo "未设定"; ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">三面时间</td>
+							<td colspan="2"><?php if($row['time3']!=NULL)echo $row["time3"];else echo "未设定"; ?></td>
+							<td colspan="2">四面时间</td>
+							<td colspan="2"><?php if($row['time4']!=NULL)echo $row["time4"];else echo "未设定"; ?></td>
+						</tr>
+						<?php
+							if($_SESSION['user_type']==="hr")
+							{
+								echo '<tr>
+									<td colspan="2">一面结果</td>
+									<td colspan="2">'.$row['result1'].'</td>
+									<td colspan="2">一面评价</td>
+									<td colspan="2">'.$row['remark1'].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">二面结果</td>
+									<td colspan="2">'.$row['result2'].'</td>
+									<td colspan="2">二面评价</td>
+									<td colspan="2">'.$row['remark2'].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">三面结果</td>
+									<td colspan="2">'.$row['result3'].'</td>
+									<td colspan="2">三面评价</td>
+									<td colspan="2">'.$row['remark3'].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">四面结果</td>
+									<td colspan="2">'.$row['result4'].'</td>
+									<td colspan="2">四面评价</td>
+									<td colspan="2">'.$row['remark4'].'</td>
+								</tr>';
+							}
+						 ?>
+						</table>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 
 		<div class="row">
 			<div class="col-lg-12">
-                    <a href="edit.php?id=<?php echo $id; ?>" class="btn btn-info">编辑</a> <!-- 编辑 -->
-					<a href="API/delete.php?id=<?php echo $id; ?>" class="btn btn-danger">删除</a> <!-- 删除 -->
-
-					<?php if($_SESSION['type']=='interviewer'){ ?>
-					<a href="evaluate.php?id=<?php echo $id; ?>" class="btn btn-info">评价</a> <!-- 只有面试官能评价 -->
-					<a href="setTime.php?id=<?php echo $id; ?>" class="btn btn-primary">设定面试时间</a>
-					<?php } ?>
-
+				<?php
+					if($_SESSION['user_type']==="hr")
+						echo '<a href="edit.php?id='.$row['id'].'" class="btn btn-warning">编辑</a>
+						<a href="evaluate.php?id='.$row['id'].'" class="btn btn-info">评价</a> <!-- 只有面试官能评价 -->
+						<a href="setTime.php?id='.$row['id'].'" class="btn btn-primary">设定面试时间</a>
+						<a href="API/getDelete.php?id='.$row['id'].'" class="btn btn-danger">删除</a>
+						';
+					else if ($_SESSION['user_type']==="dataentry") {
+						echo '<a href="edit.php?id='.$row['id'].'" class="btn btn-warning">编辑</a>
+						<a href="setTime.php?id='.$row['id'].'" class="btn btn-primary">设定面试时间</a>
+						<a href="API/getDelete.php?id='.$row['id'].'" class="btn btn-danger">删除</a>';
+					}
+					else {
+						session_destroy();
+						header('Location:login.php');
+				}
+				 ?>
 			</div>
 		</div>
 	</div>
@@ -286,11 +183,10 @@
     <div class="row">
         <div class="col-lg-12">
             <hr/>
-            <p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
+            <p style="text-align:center">&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
 
         </div>
     </div>
-
 </footer>
 
 </div>

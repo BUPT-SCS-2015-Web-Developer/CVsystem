@@ -1,44 +1,45 @@
 <?php
-
 	session_start();
-	if(!isset($_SESSION['username'])||!isset($_SESSION['type'])){
-		exit('illegal access!');
+	if(!isset($_SESSION['user_ID'])){
+		header('Location:login.php');
+        exit(0);
 	}
 
-	include_once "db_config.php";
-	$id = $_GET['id'];
-	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
-	mysql_select_db($db_database, $con);
+	include_once("db_config.php");
+	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
+	if (!$db)
+	{
+		exit('Could not connect: ' . mysql_error());
+	}
 
-	$sql = "SELECT * FROM `cvinformation` WHERE `ID`='$id' ";//查询语句
-	mysql_query("set names utf8");
-	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
-	$row = mysql_fetch_array($result);
+	$id = floatval(addslashes($_POST['id']));
 
-	if (!$row["result1"]){
+	if($_POST['result1']==="已通过"||$_POST['result1']==="未通过")
 		$result1=$_POST['result1'];
-	    //$time2=$_POST['time2'];
-		mysql_query("UPDATE cvinformation SET result1='$result1', time2='$time2' WHERE id=$id ");
-	}
-	else if ($row["result1"]&&(!$row["result2"])){
-		$remark2=$_POST['remark2'];
-	    $result2=$_POST['result2'];
-	    //$time3=$_POST['time3'];
-		mysql_query("UPDATE cvinformation SET result2='$result2', remark2='$remark2', time3='$time3' WHERE id=$id ");
-	}
-	else if ($row["result2"]&&(!$row["result3"])){
-		$remark3=$_POST['remark3'];
-	    $result3=$_POST['result3'];
-	   // $time4=$_POST['time4'];
-		mysql_query("UPDATE cvinformation SET result3='$result3', remark3='$remark3', time4='$time4' WHERE id=$id ");
-	}
-	else if ($row["result3"]&&(!$row["result4"])){
+	else
+		$result1="";
+	$remark1=$_POST['remark1'];
+	if($_POST['result2']==="已通过"||$_POST['result2']==="未通过")
+		$result2=$_POST['result2'];
+	else
+		$result2="";
+	$remark2=$_POST['remark2'];
+	if($_POST['result3']==="已通过"||$_POST['result3']==="未通过")
+		$result3=$_POST['result3'];
+	else
+		$result3="";
+	$remark3=$_POST['remark3'];
+	if($_POST['result4']==="已通过"||$_POST['result4']==="未通过")
 		$result4=$_POST['result4'];
-		mysql_query("UPDATE cvinformation SET result4='$result4' WHERE id=$id ");
+	else
+		$result4="";
+	$remark4=$_POST['remark4'];
+
+	$sql_query="UPDATE cvinformation SET result1 = '$result1' ,result2 = '$result2' , result3 = '$result3' , result4 = '$result4' , remark1 = '$remark1' ,remark2 = '$remark2' , remark3 = '$remark3' , remark4 = '$remark4' WHERE `cvinformation`.`id` = $id";
+	if(!($db->query($sql_query)))
+	 	echo json_encode(array('msg'=>$db->error));
+	else {
+		echo json_encode(array('msg'=>'录入成功'));
 	}
-
-
-
-	echo json_encode(mysql_error());//json那边需要返回数组
-    mysql_close($con);
+    mysqli_close($db);
 ?>

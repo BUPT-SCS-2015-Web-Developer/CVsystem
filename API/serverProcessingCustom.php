@@ -34,10 +34,10 @@ if(isset($order_column)){
     }
 }
 //搜索
-$search = $_GET['search']['value'];//获取前台传过来的过滤条件
+$search = addslashes($_GET['search']['value']);//获取前台传过来的过滤条件
 
 //分页
-$start = $_GET['start'];//从多少开始
+$start = addslashes($_GET['start']);//从多少开始
 $length = $_GET['length'];//数据长度
 $limitSql = '';
 $limitFlag = isset($_GET['start']) && $length != -1 ;

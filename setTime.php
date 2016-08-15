@@ -6,11 +6,25 @@
         exit(0);
     }
 
-	include_once "API/db_config.php";
-	$id = $_GET['id'];
-	$con = mysql_connect($db_host, $db_user, $db_password) or die ("不能连接数据库:");
-	mysql_select_db($db_database, $con);
+    if (isset($_GET['id']))
+		$id = addslashes($_GET['id']);//!!!
+	else {
+		die("请勿直接访问此页面！");
+	}
 
+	include_once("API/db_config.php");
+	$db = new mysqli($db_host,$db_user,$db_password,$db_database);
+	if (!$db)
+	  {
+	  die('Could not connect: ' . mysql_error());
+	  }
+      $sql_query = "SELECT * FROM `cvinformation` WHERE id = $id";//查询语句
+
+    	if (!($result = $db->query($sql_query)))
+    	{
+    		die("未能查询到相关人员！");
+    	}
+    	$row = $result->fetch_array(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +39,8 @@
     <link rel="stylesheet" href="skins/eden.css" media="screen">
     <link href="css/useso.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/input.css" rel="stylesheet">
-
+    <link href="css/insert.css" rel="stylesheet">
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <style>
         .navbar-holder-dark{
             padding: 20px 20px 200px 20px;
@@ -36,150 +50,93 @@
 
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="##" class="navbar-brand">XX公司</a> <!--连接到公司网站-->
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
-                    <li><a href="index.php">网站首页</a></li>
-                    <li class="active"><a href="view.php" >信息查询</a></li>
-                    <li><a href="input.php" >信息录入</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                          aria-expanded="false">设置 <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="change.php">修改密码</a></li>
-                            <li><a href="logout.php">退出登录</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                          <input class="form-control" placeholder="Search" type="text">
-                    </div>
-                    <button type="submit" class="btn btn-primary">搜索</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">联系站务</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+<?php include"API/header.php"; ?>
+<br/><br/><br/><br/>
 
 <div class="container">
 
 	<!-- Forms
 ================================================== -->
-<div class="bs-docs-section">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-                <h1 id="forms"></h1>
-            </div>
-        </div>
-    </div>
-
-<?php
-
-	$sql = "SELECT * FROM `cvinformation` WHERE ID='$id' ";//查询语句
-	mysql_query("set names utf8");
-	$result = mysql_query($sql,$con) or die("查询失败！错误是：".mysql_error());
-	$row = mysql_fetch_array($result);
-
-?>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="well bs-component">
-                <form class="form-horizontal" action="http://localhost/CVsystem/API/getevaluate.php ?id=<?php echo $id; ?>" method="post">
-                    <fieldset>
-                        <legend>设定面试时间</legend>
-
-                         <!--                if二面时间为空          -->
-						<?php if(!$row["time2"]){?>
-                        <div class="form-group">
-                            <label for="time2" class="col-lg-2 control-label">初试（二面）时间</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="time2" placeholder="" name="time2">
-							</div>
-                        </div>
-						<?php } ?>
-	                         <!--                          -->
-
-
-    	                    <!--                if二面时间不为空  三面时间为空         -->
-						<?php if($row["result1"]&&(!$row["result2"])){?>
-						<div class="form-group">
-                            <label for="time3" class="col-lg-2 control-label">复试指导（三面）时间</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="time3" placeholder="" name="time3">
-							</div>
-                        </div>
-						<?php } ?>
-                        <!--                                     -->
-
-
-
-                        <!--                if三面结果不为空  四面时间为空         -->
-                        <?php if($row["result2"]&&(!$row["result3"])){?>
-						<div class="form-group">
-                            <label for="time4" class="col-lg-2 control-label">复试（四面）时间</label>
-
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" id="time4" placeholder="" name="time4">
-							</div>
-                        </div>
-						<?php } ?>
-
-
-                        <div class="bs-component" id="subErr">
-							<div class="alert alert-dismissible alert-warning">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>警告</h4>
-								<p> 连接服务器失败,请 <a href="#" class="alert-link">联系站务</a>.</p>
-							</div>
-						</div>
-						<div class="bs-component" id="subSuc">
-							<div class="alert alert-dismissible alert-success">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h4>提交成功!</h4>
-								<p> 将于几秒后跳转.</p>
-							</div>
-						</div>
-
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="reset" class="btn btn-default">重置</button>
-                                <button type="submit" class="btn btn-primary">提交</button>
+    <div class="bs-docs-section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well bs-component">
+                    <form class="form-horizontal" id="settime">
+                        <fieldset>
+                            <div class="container-fluid">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4" style="text-align:center;font-size:35px">设定面试时间</div>
+                                <div class="col-lg-4" style="text-align:center;font-size:20px">面试人员:<br/><?php echo $row['name'];?></div>
                             </div>
-                        </div>
-                    </fieldset>
-                </form>
+                            <hr/>
+                            <div class="container-fluid">
+    							<div class="">
+    								<label for="time2" class="control-label col-lg-2" style="font-size:20px">用户ID</label>
+    								<div align="left" class="col-lg-9" data-date="" data-date-format="yyyy-mm-dd hh:00" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd hh:00">
+    									<input  style="BACKGROUND:#FFFFFF;height:40px" class="form-control" type="text" value="<?php echo $id;?>" id='id' readonly />
+
+    								</div>
+    							</div>
+    						</div><br/>
+                            <div class="container-fluid">
+                                <div class="">
+                                    <label for="time1" class="control-label col-lg-2" style="font-size:20px">一面时间</label>
+                                    <div align="left" class="div controls input-append date form_date col-lg-9" data-date="" data-date-format="yyyy-mm-dd_hh-00" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd_hh:00">
+                                        <input  style="BACKGROUND:#FFFFFF;height:40px" class="form-control" type="text" value="<?php if($row['time1']!=NULL) echo $row['time1']; else echo "未设定";?>" id ='time1' readonly />
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="container-fluid">
+    							<div class="">
+    								<label for="time2" class="control-label col-lg-2" style="font-size:20px">二面时间</label>
+    								<div align="left" class="div controls input-append date form_date col-lg-9" data-date="" data-date-format="yyyy-mm-dd_hh-00" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd_hh:00">
+    									<input  style="BACKGROUND:#FFFFFF;height:40px" class="form-control" type="text" value="<?php if($row['time2']!=NULL) echo $row['time2']; else echo "未设定";?>" id ='time2' readonly />
+    									<span class="add-on"><i class="icon-th"></i></span>
+    								</div>
+    							</div>
+    						</div><br/>
+                            <div class="container-fluid">
+                                <div class="">
+                                    <label for="time1" class="control-label col-lg-2" style="font-size:20px">三面时间</label>
+                                    <div align="left" class="div controls input-append date form_date col-lg-9" data-date="" data-date-format="yyyy-mm-dd_hh-00" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd_hh:00">
+                                        <input  style="BACKGROUND:#FFFFFF;height:40px" class="form-control" type="text" value="<?php if($row['time3']!=NULL) echo $row['time3']; else echo "未设定";?>" id ='time3' readonly />
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div><br/>
+                            <div class="container-fluid">
+                                <div class="">
+                                    <label for="time2" class="control-label col-lg-2" style="font-size:20px">四面时间</label>
+                                    <div align="left" class="div controls input-append date form_date col-lg-9" data-date="" data-date-format="yyyy-mm-dd_hh-00" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd_hh:00">
+                                        <input  style="BACKGROUND:#FFFFFF;height:40px" class="form-control" type="text" value="<?php if($row['time4']!=NULL) echo $row['time4']; else echo "未设定";?>" id ='time4' readonly />
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-9 col-md-offset-9">
+                                    <input type="button" id="submit" class="btn btn-primary " value="提交"/>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <hr/>
+                <p style="text-align:center">&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
+
             </div>
         </div>
-      </div>
-    </div>
-
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <hr/>
-            <p>&copy; <a href="##" rel="nofollow">Company</a>2016.</p><!--连到公司网站-->
-
-        </div>
-    </div>
-</footer>
+    </footer>
 
 </div>
 
@@ -188,7 +145,21 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/setTime.js"></script>
-
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script>
+    //datetimepicker 参数
+    $('.form_date').datetimepicker
+    ({
+        language:  'zh',
+        weekStart: 1,
+        todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 1,
+    forceParse: 0
+    });
+</script>
 
 </body>
 </html>

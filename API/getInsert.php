@@ -14,20 +14,21 @@
 	}
 	$sumSql = "SELECT * FROM cvinformation";
 	$sumresult = $db->query($sumSql);
-	$id = $sumresult->num_rows+2;
+	$id = $sumresult->num_rows+15;
 	$_SESSION['name']=$name=$_POST['name'];
 	$_SESSION['gender']=$gender=$_POST['gender'];
 	$_SESSION['subject']=$subject=$_POST['subject'];
 	$_SESSION['university']=$university=$_POST['university'];
-	$_SESSION['major']=$major=$_POST['major'];
+	$_SESSION['major1']=$major1=$_POST['major1'];
 	$_SESSION['college']=$college=$_POST['college'];
+	$_SESSION['major2']=$major2=$_POST['major2'];
 	$_SESSION['education']=$education=$_POST['education'];
 	$_SESSION['phone']=$phone=$_POST['phone'];
 	$_SESSION['email']=$email=$_POST['email'];
 	$_SESSION['schoolnum']=$schoolnum=$_POST['schoolnum'];
 	$_SESSION['position']=$position=$_POST['position'];
 
-	$sql_query="INSERT INTO `cvinformation` (`id`, `name`, `gender`, `subject`, `university`, `major`, `college`, `education`, `phone`, `email`, `schoolnum`, `position`, `result1`, `result2`, `result3`, `result4`, `remark1`, `remark2`, `remark3`, `remark4`, `registerTime`, `registerBy`) VALUES ($id, '$name', '$gender', '$subject', '$university', '$major', '$college', '$education', '$phone', '$email', '$schoolnum', '$position', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,'$registerTime', '$registerBy')";
+	$sql_query="INSERT INTO `cvinformation` (`id`, `name`, `gender`, `subject`, `university`, `major1`, `college`, `major2`, `education`, `phone`, `email`, `schoolnum`, `position`, `result1`, `result2`, `result3`, `result4`, `remark1`, `remark2`, `remark3`, `remark4`, `registerTime`, `registerBy`) VALUES ($id, '$name', '$gender', '$subject', '$university', '$major1', '$college', '$major2', '$education', '$phone', '$email', '$schoolnum', '$position', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,'$registerTime', '$registerBy')";
 	if(!($db->query($sql_query)))
 	 	echo json_encode(array('msg'=>$db->error));
 	else {
